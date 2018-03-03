@@ -50,3 +50,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/Project1/.vs/Project1/v15/Browse.VC.opendb
+/Project1/.vs/Project1/v15/Browse.VC.db
