@@ -1,0 +1,9 @@
+﻿  source6.c
+  source5.c
+c:\users\jb651\source\repos\180303_c-lang\project1\project1\source5.c(10): warning C4013: 'getch'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  source4.c
+  source3.c
+  source2.c
+  source1.c
+  코드를 생성하고 있습니다...
+  Project1.vcxproj -> C:\Users\jb651\source\repos\180303_C-lang\Project1\Debug\Project1.exe

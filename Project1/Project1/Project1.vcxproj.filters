@@ -15,22 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Project2\Project2\source1.c">
+    <ClCompile Include="source1.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Project2\Project2\source2.c">
+    <ClCompile Include="source2.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Project2\Project2\source3.c">
+    <ClCompile Include="source3.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Project2\Project2\source4.c">
+    <ClCompile Include="source4.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Project2\Project2\source5.c">
+    <ClCompile Include="source5.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Project2\Project2\source6.c">
+    <ClCompile Include="source6.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
