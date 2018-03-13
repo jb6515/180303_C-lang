@@ -1,10 +1,36 @@
 #include <stdio.h>
 
 #pragma warning(disable: 4996)
-int menu(void)
-{
-	printf("메뉴를 선택하세요");
 
+void menu(void);
+void add_student(void);
+
+
+int main(void)
+{
+	int choice;
+
+	switch (choice)
+	{
+	case'1':	add_student(); break;
+	case'2':	add
+	}
+
+
+
+
+	getchar();
+	return 0;
+}
+
+
+void menu(void)
+{
+	printf("메뉴를 선택하세요\n");
+	printf("1. 학생 테이블 작성\n");
+	printf("2. 과목 테이블 작성\n");
+	printf("3. 수강 테이블 작성\n");
+	printf("4. 작성한 데이터 불러오기");
 }
 
 void add_student(void)
@@ -33,18 +59,4 @@ void add_student(void)
 	{
 		printf("%s %s %s", student[i].stuname, student[i].address, student[i].major);
 	}
-}
-
-
-int main(void)
-{
-	int i;
-
-
-
-
-
-
-	getchar();
-	return 0;
 }
