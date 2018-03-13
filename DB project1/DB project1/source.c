@@ -4,22 +4,31 @@
 
 void menu(void);
 void add_student(void);
-
+void add_course(void);
+void add_course_taken(void);
+void view(void);
 
 int main(void)
 {
-	int choice;
-
-	switch (choice)
+	char choice;
+	while (1)
 	{
-	case'1':	add_student(); break;
-	case'2':	add
+		menu();
+		choice = getch();
+		fflush(stdin);
+		switch (choice)
+		{
+		case'1':	add_student();			break;
+		case'2':	add_course();			break;
+		case'3':	add_course_taken();		break;
+		case'4':	view();					break;
+		case'5':	return;
+		}
+
+
 	}
 
-
-
-
-	getchar();
+	system("puase");
 	return 0;
 }
 
@@ -30,7 +39,7 @@ void menu(void)
 	printf("1. 학생 테이블 작성\n");
 	printf("2. 과목 테이블 작성\n");
 	printf("3. 수강 테이블 작성\n");
-	printf("4. 작성한 데이터 불러오기");
+	printf("4. 작성한 데이터 불러오기\n");
 }
 
 void add_student(void)
@@ -42,7 +51,12 @@ void add_student(void)
 		char stuname[10];
 		char address[20];
 		char major[10];
-	}student[5];
+	}student[4];
+
+	printf("입력할 학생 수를 입력하세요 (최대 5명)\n");
+	scanf("%d", &j);
+	while (getchar() != '\n');
+
 
 	for (i = 0; i < j; i++)
 	{
@@ -55,8 +69,23 @@ void add_student(void)
 		while (getchar() != '\n');
 	}
 
-	for (i = j; i < 1; i++)
+	printf("이름 주소 학과");
+	for (i = 0; i < j; i++)
 	{
-		printf("%s %s %s", student[i].stuname, student[i].address, student[i].major);
+		printf("%s %s %s\n", student[i].stuname, student[i].address, student[i].major);
 	}
+}
+
+
+void add_course(void)
+{
+	return 0;
+}
+void add_course_taken(void)
+{
+	return 0;
+}
+void view(void)
+{
+	return 0;
 }
