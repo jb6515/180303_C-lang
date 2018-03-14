@@ -3,7 +3,7 @@
 #pragma warning(disable: 4996)
 int size = 0; // 구조체 개수만큼 파일에 기록하기 위해 선언, 이진파일 첫 부분에 저장됨
 
-struct student_info
+struct student_info // 학생 테이블 구조체
 {
 	char stuid[20];
 	char stuname[20];
@@ -12,7 +12,7 @@ struct student_info
 };
 typedef struct student_info data_s;
 
-struct course_info
+struct course_info // 과목 테이블 구조체
 {
 	char cou_no[20];
 	char cou_name[30];
@@ -20,7 +20,7 @@ struct course_info
 };
 typedef struct course_info data_c;
 
-struct course_taken_info
+struct course_taken_info // 수강 테이블 구조체
 {
 	char stuid[20];
 	char cou_no[20];
@@ -39,10 +39,10 @@ int main(void)
 	char choice;
 	while (1)
 	{
-		menu(); // 메뉴텍스트
-		choice = getch(); // 메뉴를 입력받음
-		fflush(stdin); // 버퍼 초기화
-		switch (choice) //switch문을 사용하여 입력받은 숫자 처리
+		menu(); 
+		choice = getch(); 
+		fflush(stdin); 
+		switch (choice) 
 		{
 		case'1':	add_student();			break;
 		case'2':	add_course();			break;
@@ -70,14 +70,14 @@ void menu(void)
 
 void add_student(void)
 {
-	int i = 0; // for문 사용을 위해 선언
+	int i = 0; 
 
 	data_s student[5]; // 구조체 배열 선언
 
 	system("cls"); // 화면 비우기
 
 	printf("입력할 학생 수를 입력하세요 (최대 5명)\n");
-	scanf("%d", &size); // for문에서 크기만큼 입력받음 또한, 파일 저장시에 맨 앞에 기록해서 파일 로드시에 size만큼만 불러옴
+	scanf("%d", &size); // 데이터의 수를 입력받음
 	fflush(stdin);
 	for (i = 0; i < size; i++)
 	{
@@ -95,11 +95,11 @@ void add_student(void)
 	FILE *fp = fopen("lsd_student.dat", "wb");
 	if (fp == NULL)
 		return;
-	fwrite(&size, sizeof(int), 1, fp);
-	fwrite(student, sizeof(data_s), size, fp);
+	fwrite(&size, sizeof(int), 1, fp); // 데이터의 수를 파일 첫부분에 기록
+	fwrite(student, sizeof(data_s), size, fp); // 데이터 내용을 기록
 
 
-	fclose(fp);
+	fclose(fp); // 파일 닫기
 
 	system("pause");
 }
@@ -107,14 +107,14 @@ void add_student(void)
 
 void add_course(void)
 {
-	int i = 0; // for문 사용을 위해 선언
+	int i = 0;
 
 	data_c course[5]; // 구조체 배열 선언
 
 	system("cls"); // 화면 비우기
 
 	printf("입력할 과목 수를 입력하세요 (최대 5개)\n");
-	scanf("%d", &size); // for문에서 크기만큼 입력받음 또한, 파일 저장시에 맨 앞에 기록해서 파일 로드시에 size만큼만 불러옴
+	scanf("%d", &size); 
 	fflush(stdin);
 
 
@@ -145,14 +145,14 @@ void add_course(void)
 }
 void add_course_taken(void)
 {
-	int i = 0; // for문 사용을 위해 선언
+	int i = 0; 
 
-	data_ct course_taken[5]; // 구조체 배열 선언
+	data_ct course_taken[5]; 
 
-	system("cls"); // 화면 비우기
+	system("cls"); 
 
 	printf("입력할 수강데이터의 수를 입력하세요 (최대 5개)\n");
-	scanf("%d", &size); // for문에서 크기만큼 입력받음 또한, 파일 저장시에 맨 앞에 기록해서 파일 로드시에 size만큼만 불러옴
+	scanf("%d", &size); 
 	fflush(stdin);
 
 	for (i = 0; i < size; i++)
@@ -186,16 +186,16 @@ void view(void)
 	int i = 0;
 	int j = 0;
 	int n = 0;
+	
+	// 각각의 테이블의 크기를 불러올 변수 3개 선언
 	int size1 = 0;
 	int size2 = 0;
 	int size3 = 0;
 
-
+	// 3가지 테이블 구조체 선언
 	data_s student[5];
-
-	data_c course[5]; // 구조체 배열 선언
-
-	data_ct course_taken[5]; // 구조체 배열 선언
+	data_c course[5]; 
+	data_ct course_taken[5];
 
 	FILE *fp;
 
@@ -204,16 +204,13 @@ void view(void)
 		return;
 	fread(&size1, sizeof(int), 1, fp);
 	fread(&student, sizeof(data_s), size1, fp);
-
 	fclose(fp);
 
-	
 	fp = fopen("lsd_course.dat", "rb");
 	if (fp == NULL)
 		return;
 	fread(&size2, sizeof(int), 1, fp);
 	fread(&course, sizeof(data_c), size2, fp);
-
 	fclose(fp);
 
 	fp = fopen("lsd_coursetaken.dat", "rb");
@@ -221,33 +218,35 @@ void view(void)
 		return;
 	fread(&size3, sizeof(int), 1, fp);
 	fread(&course_taken, sizeof(data_ct), size3, fp);
-
 	fclose(fp);
-	
+	system("cls");
+
 	for (n = 0; n < size3; n++)
 	{
 		for (i = 0; i < size1; i++)
 		{
-			if (strcmp(course_taken[n].stuid, student[i].stuid) == 0)
+			if (strcmp(course_taken[n].stuid, student[i].stuid) == 0) // 학번이 같은 정보를 찾으면
 			{
-				printf("%s ", student[i].stuid);
-				printf("%s ", student[i].stuname);
-				printf("%s ", student[i].major);
-				printf("%s ", student[i].address);
+				// 학생 정보를 출력
+				printf("  %s\n", student[i].stuid);
+				printf("  %s\n ", student[i].stuname);
+				printf("  %s\n ", student[i].major);
+				printf("  %s\n ", student[i].address);
 			}
 		}
 
 		for (j = 0; j < size2; j++)
 		{
-			if (strcmp(course_taken[n].cou_no, course[j].cou_no) == 0)
+			if (strcmp(course_taken[n].cou_no, course[j].cou_no) == 0) // 교과목번호가 같은 정보를 찾으면
 			{
+				// 교과목 정보를 출력
 				printf("%s ", course[j].cou_name);
 				printf("%s ", course[j].cou_no);
 				printf("%s ", course[j].professor);
 			}
 
 		}
-
+		
 		printf("%s \n", course_taken[n].grade);
 	}
 	
