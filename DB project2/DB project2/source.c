@@ -8,13 +8,14 @@ struct student_info
 	char stuid[20];
 	char stuname[20];
 	char major[20];
+	char address[40];
 };
 typedef struct student_info data_s;
 
 struct course_info
 {
 	char cou_no[20];
-	char cou_name[20];
+	char cou_name[30];
 	char professor[20];
 };
 typedef struct course_info data_c;
@@ -86,6 +87,8 @@ void add_student(void)
 		scanf("%s", student[i].stuname);
 		printf("%d번째 학생의 학과를 입력 : ", i + 1);
 		scanf("%s", student[i].major);
+		printf("%d번째 학생의 주소를 입력 : ", i + 1);
+		scanf("%s", student[i].address);
 		fflush(stdin);
 	}
 
@@ -204,7 +207,7 @@ void view(void)
 
 	fclose(fp);
 
-
+	
 	fp = fopen("lsd_course.dat", "rb");
 	if (fp == NULL)
 		return;
@@ -220,26 +223,7 @@ void view(void)
 	fread(&course_taken, sizeof(data_ct), size3, fp);
 
 	fclose(fp);
-
-	/*
-	// 입력된 내용이 잘 로드되었는지 확인하는 구문
-	for (i = 0; i < size1; i++)
-	{
-	printf("%s %s %s\n", student[i].stuid, student[i].stuname, student[i].major);
-	}
-
-	for (i = 0; i < size2; i++)
-	{
-	printf("%s %s %s\n", course[i].cou_no, course[i].cou_name, course[i].professor);
-	}
-
-	for (i = 0; i < size3; i++)
-	{
-	printf("%s %s %s\n", course_taken[i].stuid, course_taken[i].cou_no, course_taken[i].grade);
-	}
-
-	*/
-
+	
 	for (n = 0; n < size3; n++)
 	{
 		for (i = 0; i < size1; i++)
@@ -249,6 +233,7 @@ void view(void)
 				printf("%s ", student[i].stuid);
 				printf("%s ", student[i].stuname);
 				printf("%s ", student[i].major);
+				printf("%s ", student[i].address);
 			}
 		}
 
@@ -265,5 +250,5 @@ void view(void)
 
 		printf("%s \n", course_taken[n].grade);
 	}
-
+	
 }

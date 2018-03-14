@@ -1,0 +1,4 @@
+﻿  source.c
+c:\users\jb651\source\repos\180303_c-lang\db project2\db project2\source.c(43): warning C4013: 'getch'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+c:\users\jb651\source\repos\180303_c-lang\db project2\db project2\source.c(77): warning C4013: 'system'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  DB project2.vcxproj -> C:\Users\jb651\Source\Repos\180303_C-lang\DB project2\Debug\DB project2.exe
