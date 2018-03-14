@@ -11,21 +11,21 @@ struct student_info
 };
 typedef struct student_info data_s;
 
-struct course_info // 구조체 만들기
+struct course_info
 {
 	char cou_no[20];
 	char cou_name[20];
 	char professor[20];
 };
-typedef struct course_info data_c; // 자료형 재정의
+typedef struct course_info data_c;
 
-struct course_taken_info // 구조체 만들기
+struct course_taken_info
 {
 	char stuid[20];
 	char cou_no[20];
 	char grade[20];
 };
-typedef struct course_taken_info data_ct; // 자료형 재정의
+typedef struct course_taken_info data_ct;
 
 void menu(void); // 메뉴를 불러오는 함수
 void add_student(void); // 학생테이블을 작성하는 함수
