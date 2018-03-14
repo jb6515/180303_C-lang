@@ -228,10 +228,7 @@ void view(void)
 			if (strcmp(course_taken[n].stuid, student[i].stuid) == 0) // 학번이 같은 정보를 찾으면
 			{
 				// 학생 정보를 출력
-				printf("  %s\n", student[i].stuid);
-				printf("  %s\n ", student[i].stuname);
-				printf("  %s\n ", student[i].major);
-				printf("  %s\n ", student[i].address);
+				printf("%s ", student[i].stuname);
 			}
 		}
 
@@ -241,8 +238,6 @@ void view(void)
 			{
 				// 교과목 정보를 출력
 				printf("%s ", course[j].cou_name);
-				printf("%s ", course[j].cou_no);
-				printf("%s ", course[j].professor);
 			}
 
 		}
