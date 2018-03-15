@@ -3,30 +3,24 @@
 #pragma warning(disable: 4996)
 int size = 0; // 구조체 개수만큼 파일에 기록하기 위해 선언, 이진파일 첫 부분에 저장됨
 
-struct student_info // 학생 테이블 구조체
-{
+typedef struct {
 	char stuid[20];
 	char stuname[20];
 	char major[20];
 	char address[40];
-};
-typedef struct student_info data_s;
+} str_s;
 
-struct course_info // 과목 테이블 구조체
-{
+typedef struct {
 	char cou_no[20];
 	char cou_name[30];
 	char professor[20];
-};
-typedef struct course_info data_c;
+} str_c;
 
-struct course_taken_info // 수강 테이블 구조체
-{
+typedef struct {
 	char stuid[20];
 	char cou_no[20];
-	char grade[20];
-};
-typedef struct course_taken_info data_ct;
+	char grade[5];
+} str_ct;
 
 void menu(void); // 메뉴를 불러오는 함수
 void add_student(void); // 학생테이블을 작성하는 함수
@@ -72,7 +66,7 @@ void add_student(void)
 {
 	int i = 0; 
 
-	data_s student[5]; // 구조체 배열 선언
+	str_s student[5]; // 구조체 배열 선언
 
 	system("cls"); // 화면 비우기
 
@@ -96,7 +90,7 @@ void add_student(void)
 	if (fp == NULL)
 		return;
 	fwrite(&size, sizeof(int), 1, fp); // 데이터의 수를 파일 첫부분에 기록
-	fwrite(student, sizeof(data_s), size, fp); // 데이터 내용을 기록
+	fwrite(student, sizeof(str_s), size, fp); // 데이터 내용을 기록
 
 
 	fclose(fp); // 파일 닫기
@@ -109,7 +103,7 @@ void add_course(void)
 {
 	int i = 0;
 
-	data_c course[5]; // 구조체 배열 선언
+	str_c course[5]; // 구조체 배열 선언
 
 	system("cls"); // 화면 비우기
 
@@ -138,7 +132,7 @@ void add_course(void)
 	if (fp == NULL)
 		return;
 	fwrite(&size, sizeof(int), 1, fp);
-	fwrite(course, sizeof(data_c), size, fp);
+	fwrite(course, sizeof(str_c), size, fp);
 	fclose(fp);
 
 	system("pause");
@@ -147,7 +141,7 @@ void add_course_taken(void)
 {
 	int i = 0; 
 
-	data_ct course_taken[5]; 
+	str_ct course_taken[5]; 
 
 	system("cls"); 
 
@@ -174,8 +168,8 @@ void add_course_taken(void)
 	FILE *fp = fopen("lsd_coursetaken.dat", "wb");
 	if (fp == NULL)
 		return;
-	fwrite(&size, sizeof(int), 1, fp);
-	fwrite(course_taken, sizeof(data_ct), size, fp);
+	fwrite(&size, sizeof(int), 1, fp); // 
+	fwrite(course_taken, sizeof(str_ct), size, fp);
 	fclose(fp);
 
 	system("pause");
@@ -193,9 +187,9 @@ void view(void)
 	int size3 = 0;
 
 	// 3가지 테이블 구조체 선언
-	data_s student[5];
-	data_c course[5]; 
-	data_ct course_taken[5];
+	str_s student[5];
+	str_c course[5]; 
+	str_ct course_taken[5];
 
 	FILE *fp;
 
@@ -203,21 +197,21 @@ void view(void)
 	if (fp == NULL)
 		return;
 	fread(&size1, sizeof(int), 1, fp);
-	fread(&student, sizeof(data_s), size1, fp);
+	fread(&student, sizeof(str_s), size1, fp);
 	fclose(fp);
 
 	fp = fopen("lsd_course.dat", "rb");
 	if (fp == NULL)
 		return;
 	fread(&size2, sizeof(int), 1, fp);
-	fread(&course, sizeof(data_c), size2, fp);
+	fread(&course, sizeof(str_c), size2, fp);
 	fclose(fp);
 
 	fp = fopen("lsd_coursetaken.dat", "rb");
 	if (fp == NULL)
 		return;
 	fread(&size3, sizeof(int), 1, fp);
-	fread(&course_taken, sizeof(data_ct), size3, fp);
+	fread(&course_taken, sizeof(str_ct), size3, fp);
 	fclose(fp);
 	system("cls");
 
