@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #pragma warning(disable: 4996)
+/*
+데이터베이스기초 DB처리방식 비교과제
+32151675 박범준
+*/
 int size = 0; // 구조체 개수만큼 파일에 기록하기 위해 선언, 이진파일 첫 부분에 저장됨
 
 typedef struct {
@@ -193,6 +197,7 @@ void view(void)
 
 	FILE *fp;
 
+	// 테이블이 들어있는 3개의 데이터를 전부 불러옴
 	fp = fopen("lsd_student.dat", "rb");
 	if (fp == NULL)
 		return;
@@ -215,6 +220,7 @@ void view(void)
 	fclose(fp);
 	system("cls");
 
+	// 수강테이블을 학생테이블과 교과목테이블을 참조하여 출력하는 부분
 	for (n = 0; n < size3; n++)
 	{
 		for (i = 0; i < size1; i++)

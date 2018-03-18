@@ -2,6 +2,9 @@
 #include <string.h>
 #pragma warning(disable: 4996)
 int size = 0; // 구조체 개수만큼 파일에 기록하기 위해 선언, 이진파일 첫 부분에 저장됨
+int size1 = 0;
+int size2 = 0;
+int size3 = 0;
 
 typedef struct {
 	char stuid[20];
@@ -9,13 +12,11 @@ typedef struct {
 	char major[20];
 	char address[40];
 } str_s;
-
 typedef struct {
 	char cou_no[20];
 	char cou_name[30];
 	char professor[20];
 } str_c;
-
 typedef struct {
 	char stuid[20];
 	char cou_no[20];
@@ -26,11 +27,17 @@ str_s* po_s;
 str_c* po_c;
 str_ct* po_ct;
 
+po_s = NULL;
+po_c = NULL;
+po_ct = NULL;
+
 void menu(void); // 메뉴를 불러오는 함수
 void add_student(void); // 학생테이블을 작성하는 함수
 void add_course(void); // 교과목테이블을 작성하는 함수
 void add_course_taken(void); // 수강테이블을 작성하는 함수
 void view(void); // 작성된 테이블들을 불러와서 출력해주는 함수
+void file_save(void);
+void file_load(void);
 
 int main(void)
 {
@@ -198,29 +205,7 @@ void view(void)
 	str_c course[5];
 	str_ct course_taken[5];
 
-	FILE *fp;
-
-	fp = fopen("lsd_student.dat", "rb");
-	if (fp == NULL)
-		return;
-	fread(&size1, sizeof(int), 1, fp);
-	po_s = (str_s*)malloc(sizeof(str_s)*size1);
-	fread(po_s, sizeof(str_s), size1, fp);
-	fclose(fp);
-
-	fp = fopen("lsd_course.dat", "rb");
-	if (fp == NULL)
-		return;
-	fread(&size2, sizeof(int), 1, fp);
-	fread(&course, sizeof(str_c), size2, fp);
-	fclose(fp);
-
-	fp = fopen("lsd_coursetaken.dat", "rb");
-	if (fp == NULL)
-		return;
-	fread(&size3, sizeof(int), 1, fp);
-	fread(&course_taken, sizeof(str_ct), size3, fp);
-	fclose(fp);
+	
 	system("cls");
 
 	for (n = 0; n < size3; n++)
@@ -246,5 +231,70 @@ void view(void)
 
 		printf("%s \n", course_taken[n].grade);
 	}
+
+}
+
+void file_save(void)
+{
+	FILE *fp;
+
+	fp = fopen("lsd_student.dat", "rb");
+	if (fp == NULL)
+	{
+		printf("파일을 저장하는데 문제가 있습니다.");
+		return;
+	}
+	fwrite(&size1, sizeof(int), 1, fp);
+	po_s = (str_s*)malloc(sizeof(str_s)*size1);
+	fwrite(po_s, sizeof(str_s), size1, fp);
+	fclose(fp);
+
+	fp = fopen("lsd_course.dat", "rb");
+	if (fp == NULL)
+	{
+		printf("파일을 저장하는데 문제가 있습니다.");
+		return;
+	}
+	fwrite(&size2, sizeof(int), 1, fp);
+	fwrite(po_c, sizeof(str_c), size2, fp);
+	fclose(fp);
+
+	fp = fopen("lsd_coursetaken.dat", "rb");
+	if (fp == NULL)
+	{
+		printf("파일을 저장하는데 문제가 있습니다.");
+		return;
+	}
+	fwrite(&size3, sizeof(int), 1, fp);
+	fwrite(po_ct, sizeof(str_ct), size3, fp);
+	fclose(fp);
+}
+
+void file_load(void)
+{
+	
+	FILE *fp;
+
+	fp = fopen("lsd_student.dat", "rb");
+	if (fp == NULL)
+		printf("학생테이블이 없습니다. 새로 작성해주세요.\n");
+	fread(&size1, sizeof(int), 1, fp);
+	po_s = (str_s*)malloc(sizeof(str_s)*size1);
+	fread(po_s, sizeof(str_s), size1, fp);
+	fclose(fp);
+
+	fp = fopen("lsd_course.dat", "rb");
+	if (fp == NULL)
+		printf("과목테이블이 없습니다. 새로 작성해주세요.\n");
+	fread(&size2, sizeof(int), 1, fp);
+	fread(po_c, sizeof(str_c), size2, fp);
+	fclose(fp);
+
+	fp = fopen("lsd_coursetaken.dat", "rb");
+	if (fp == NULL)
+		printf("수강테이블이 없습니다. 새로 작성해주세요.\n");
+	fread(&size3, sizeof(int), 1, fp);
+	fread(po_ct, sizeof(str_ct), size3, fp);
+	fclose(fp);
 
 }
